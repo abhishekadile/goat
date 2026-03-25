@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G.O.A.T. Handyman – Get It Done Right</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#F26522; --orange-dark:#D4541A; --orange-light:#FF8A4A;
+  --navy:#1a1f2e; --navy-light:#252c40; --white:#FFFFFF;
+  --gray:#f5f5f0; --text:#2a2a2a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(26,31,46,0.97);backdrop-filter:blur(12px);
+  padding:0 5%;display:flex;align-items:center;justify-content:space-between;
+  height:70px;border-bottom:2px solid var(--orange);transition:background 0.3s;
+}
+nav.scrolled{background:rgba(26,31,46,1);}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-goat-icon{
+  width:44px;height:44px;border-radius:50%;background:var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);
+}
+.nav-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--white);letter-spacing:2px;}
+.nav-logo-text em{color:var(--orange);font-style:normal;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-weight:700;font-size:0.83rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;position:relative;padding-bottom:2px;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--orange);transition:width 0.25s;}
+.nav-links a:hover{color:var(--orange);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a.active{color:var(--orange);}
+.nav-cta{background:var(--orange) !important;color:white !important;padding:0.6rem 1.4rem;border-radius:50px;font-weight:800;font-size:0.83rem;letter-spacing:1px;transition:all 0.2s;}
+.nav-cta:hover{background:var(--orange-light) !important;transform:scale(1.05);}
+.nav-cta::after{display:none !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+.hamburger span{width:24px;height:2px;background:white;border-radius:2px;transition:all 0.3s;display:block;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(26,31,46,0.99);backdrop-filter:blur(12px);padding:1.5rem 5%;flex-direction:column;gap:0;border-bottom:2px solid var(--orange);z-index:999;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:rgba(255,255,255,0.85);text-decoration:none;font-weight:700;font-size:1rem;letter-spacing:1px;text-transform:uppercase;padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;}
+.mobile-menu .mob-cta{background:var(--orange);color:white;padding:0.9rem 1.5rem;border-radius:50px;text-align:center;border:none;margin-top:0.75rem;}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:70px;}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(242,101,34,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(242,101,34,0.06) 1px,transparent 1px);background-size:60px 60px;}
+.hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(242,101,34,0.18) 0%,transparent 70%);right:5%;top:50%;transform:translateY(-50%);pointer-events:none;}
+.hero-content{position:relative;z-index:2;display:flex;align-items:center;gap:5rem;max-width:1200px;padding:0 5%;width:100%;}
+.hero-text{flex:1;}
+.hero-badge{display:inline-block;background:rgba(242,101,34,0.15);border:1px solid rgba(242,101,34,0.4);color:var(--orange-light);padding:0.35rem 1rem;border-radius:50px;font-size:0.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeInUp 0.6s ease both;}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);color:var(--white);line-height:0.95;letter-spacing:2px;animation:fadeInUp 0.7s 0.1s ease both;}
+.hero-h1 em{color:var(--orange);display:block;font-style:normal;}
+.hero-sub{color:rgba(255,255,255,0.65);font-size:1.1rem;margin-top:1.5rem;line-height:1.7;max-width:480px;font-weight:600;animation:fadeInUp 0.7s 0.2s ease both;}
+.hero-actions{display:flex;gap:1rem;margin-top:2.5rem;animation:fadeInUp 0.7s 0.3s ease both;flex-wrap:wrap;}
+.btn-primary{background:var(--orange);color:white;padding:1rem 2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all 0.2s;box-shadow:0 8px 30px rgba(242,101,34,0.4);}
+.btn-primary:hover{background:var(--orange-light);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:white;padding:1rem 2rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;border:2px solid rgba(255,255,255,0.25);transition:all 0.2s;}
+.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;animation:fadeInUp 0.7s 0.4s ease both;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--orange);display:block;}
+.stat-label{font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+
+/* Hero visual — animated SVG goat illustration */
+.hero-visual{flex:0 0 420px;display:flex;align-items:center;justify-content:center;animation:fadeInRight 0.8s 0.2s ease both;position:relative;}
+.goat-svg-wrap{width:360px;height:360px;position:relative;}
+.goat-ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(242,101,34,0.2);animation:spin 20s linear infinite;}
+.goat-ring-2{position:absolute;inset:-30px;border-radius:50%;border:1px dashed rgba(242,101,34,0.1);animation:spin 30s linear infinite reverse;}
+.goat-circle{width:100%;height:100%;border-radius:50%;background:rgba(242,101,34,0.08);display:flex;align-items:center;justify-content:center;animation:float 3s ease-in-out infinite;position:relative;z-index:2;}
+.goat-emoji-big{font-size:9rem;line-height:1;filter:drop-shadow(0 10px 30px rgba(242,101,34,0.5));}
+.goat-tool-orbit{position:absolute;inset:0;animation:spin 10s linear infinite;}
+.tool-dot{position:absolute;font-size:1.6rem;}
+
+.particle{position:absolute;font-size:1.5rem;opacity:0.08;animation:drift linear infinite;pointer-events:none;}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes counterSpin{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes drift{from{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:0.08}90%{opacity:0.08}to{transform:translateY(-100px) rotate(360deg);opacity:0}}
+
+/* SERVICES */
+.section{padding:100px 5%;}
+.section-label{display:inline-block;font-size:0.78rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:2px;line-height:1;color:var(--navy);}
+.section-title.light{color:white;}
+.services-bg{background:var(--gray);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem;margin-top:3rem;}
+.service-card{background:white;border-radius:20px;padding:2rem;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;border:1px solid rgba(0,0,0,0.06);}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.1);}
+.service-card:hover::before{transform:scaleX(1);}
+.service-icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1.5px;color:var(--navy);margin-bottom:0.75rem;}
+.service-card ul{list-style:none;color:#666;font-size:0.9rem;line-height:1.8;font-weight:600;}
+.service-card ul li::before{content:'✓ ';color:var(--orange);font-weight:900;}
+
+/* PROCESS */
+.process-section{padding:100px 5%;background:white;overflow:hidden;}
+.process-container{max-width:1100px;margin:0 auto;}
+.steps-wrapper{position:relative;margin-top:4rem;}
+.steps-line{position:absolute;top:52px;left:calc(12.5%);right:calc(12.5%);height:3px;background:rgba(242,101,34,0.15);border-radius:3px;overflow:hidden;}
+.steps-line-fill{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--orange-light));border-radius:3px;transition:width 0.6s cubic-bezier(0.4,0,0.2,1);}
+.steps-track{display:flex;}
+.process-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1rem;cursor:pointer;}
+.step-icon-wrap{width:104px;height:104px;border-radius:50%;background:white;border:3px solid rgba(242,101,34,0.25);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;z-index:2;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 0 0 8px white;margin-bottom:1.2rem;}
+.step-num{position:absolute;top:-4px;right:-4px;width:28px;height:28px;background:var(--orange);border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:0.9rem;color:white;display:flex;align-items:center;justify-content:center;border:2px solid white;}
+.process-step.active .step-icon-wrap,.process-step:hover .step-icon-wrap{background:var(--orange);border-color:var(--orange);transform:scale(1.12) translateY(-6px);box-shadow:0 0 0 8px white,0 16px 40px rgba(242,101,34,0.4);}
+.step-emoji{display:block;}
+.process-step.active .step-emoji,.process-step:hover .step-emoji{filter:brightness(0) invert(1);}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1.5px;color:var(--navy);margin-bottom:0.4rem;transition:color 0.3s;}
+.process-step.active .step-title{color:var(--orange);}
+.step-desc{color:#888;font-size:0.88rem;line-height:1.6;font-weight:600;max-width:180px;margin:0 auto;}
+.step-detail-panel{margin-top:3rem;background:var(--navy);border-radius:24px;padding:2.5rem 3rem;display:flex;align-items:center;gap:3rem;min-height:180px;position:relative;overflow:hidden;}
+.step-detail-panel::before{content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:rgba(242,101,34,0.06);border-radius:50%;}
+.detail-icon{font-size:5rem;flex-shrink:0;animation:float 3s ease-in-out infinite;}
+.detail-content{flex:1;}
+.detail-step-label{font-size:0.75rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;}
+.detail-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:white;letter-spacing:2px;margin-bottom:0.75rem;}
+.detail-text{color:rgba(255,255,255,0.6);font-size:0.95rem;line-height:1.7;font-weight:600;}
+.detail-cta{margin-top:1.2rem;}
+.detail-cta a{color:var(--orange);font-weight:800;font-size:0.9rem;text-decoration:none;letter-spacing:1px;text-transform:uppercase;}
+.detail-cta a:hover{color:var(--orange-light);}
+@keyframes panelSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.panel-animate{animation:panelSlide 0.35s ease both;}
+
+/* ABOUT */
+.guarantee-section{background:var(--navy);padding:100px 5%;position:relative;overflow:hidden;}
+.guarantee-section::before{content:'G.O.A.T.';position:absolute;font-family:'Bebas Neue',sans-serif;font-size:25vw;color:rgba(242,101,34,0.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+.guarantee-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:5rem;position:relative;z-index:1;}
+.guarantee-text{flex:1;}
+.guarantee-points{flex:1;display:flex;flex-direction:column;gap:1.5rem;margin-top:2.5rem;}
+.guarantee-item{display:flex;gap:1.5rem;align-items:flex-start;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.5rem;transition:all 0.3s;}
+.guarantee-item:hover{background:rgba(242,101,34,0.08);border-color:rgba(242,101,34,0.3);transform:translateX(6px);}
+.guarantee-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--orange);line-height:1;flex-shrink:0;}
+.guarantee-item-text h4{font-weight:800;color:white;margin-bottom:0.3rem;}
+.guarantee-item-text p{color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;}
+
+/* GAME */
+.game-section{background:var(--navy);padding:100px 5%;}
+.game-wrapper{max-width:700px;margin:3rem auto 0;background:var(--navy-light);border-radius:24px;overflow:hidden;border:2px solid rgba(242,101,34,0.3);box-shadow:0 30px 80px rgba(0,0,0,0.4);}
+.game-header{background:rgba(242,101,34,0.1);border-bottom:1px solid rgba(242,101,34,0.2);padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;}
+.game-header h3{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:white;letter-spacing:2px;}
+.game-badge{background:var(--orange);color:white;font-size:0.7rem;font-weight:900;letter-spacing:1px;padding:0.2rem 0.6rem;border-radius:4px;text-transform:uppercase;}
+#gameCanvas{display:block;width:100%;background:#111827;}
+.game-controls{padding:1.2rem 2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;background:rgba(0,0,0,0.2);}
+.game-btn{background:var(--orange);color:white;border:none;padding:0.65rem 1.8rem;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;cursor:pointer;transition:all 0.2s;}
+.game-btn:hover{background:var(--orange-light);transform:scale(1.04);}
+.game-score-display{margin-left:auto;color:rgba(255,255,255,0.6);font-size:0.85rem;font-weight:700;}
+.game-score-display span{color:var(--orange);font-size:1.1rem;font-weight:900;}
+.game-instructions{padding:1rem 2rem;color:rgba(255,255,255,0.4);font-size:0.8rem;font-weight:600;text-align:center;}
+
+/* CTA */
+.cta-section{background:var(--orange);padding:80px 5%;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(255,255,255,0.04) 30px,rgba(255,255,255,0.04) 31px);}
+.cta-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:white;letter-spacing:3px;position:relative;z-index:1;margin-bottom:1rem;}
+.cta-section p{color:rgba(255,255,255,0.85);font-size:1.1rem;font-weight:700;margin-bottom:2rem;position:relative;z-index:1;}
+.cta-phone{display:inline-block;font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:white;letter-spacing:3px;margin-bottom:2rem;position:relative;z-index:1;}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;position:relative;z-index:1;flex-wrap:wrap;}
+.btn-white{background:white;color:var(--orange);padding:1rem 2.5rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;transition:all 0.2s;box-shadow:0 8px 30px rgba(0,0,0,0.15);}
+.btn-white:hover{transform:translateY(-3px);}
+.btn-outline-white{background:transparent;color:white;padding:1rem 2.5rem;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;border:2px solid rgba(255,255,255,0.6);transition:all 0.2s;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.15);}
+
+/* FOOTER */
+footer{background:#0f1420;padding:3rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer-brand{display:flex;align-items:center;gap:0.75rem;}
+.footer-icon{width:46px;height:46px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.footer-logo-text{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:white;letter-spacing:2px;}
+.footer-logo-text em{color:var(--orange);font-style:normal;}
+.footer-info{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.8;font-weight:600;}
+.footer-copy{color:rgba(255,255,255,0.25);font-size:0.8rem;font-weight:600;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  .hero-content{flex-direction:column;text-align:center;}
+  .hero-visual{flex:none;width:260px;}
+  .goat-svg-wrap{width:240px;height:240px;}
+  .goat-emoji-big{font-size:6rem;}
+  .goat-ring,.goat-ring-2{display:none;}
+  .hero-actions{justify-content:center;}
+  .hero-stats{justify-content:center;}
+  .guarantee-inner{flex-direction:column;}
+  .cta-buttons{flex-direction:column;align-items:center;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .steps-track{flex-direction:column;align-items:center;gap:1.5rem;}
+  .steps-line{display:none;}
+  .step-detail-panel{flex-direction:column;text-align:center;padding:2rem;}
+  .detail-icon{font-size:3.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    <div class="nav-goat-icon">🐐</div>
+    <div class="nav-logo-text">G.O.A.T. <em>Handyman</em></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" class="nav-link">Services</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="https://goathandyman.com/join-our-team" target="_blank" class="nav-link">Join Our Team</a></li>
+    <li><a href="https://goathandyman.com/get-an-estimate" target="_blank" class="nav-cta">Request an Estimate</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="https://goathandyman.com/join-our-team" target="_blank">Join Our Team</a>
+  <a href="https://goathandyman.com/get-an-estimate" target="_blank" class="mob-cta">Request an Estimate</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="particle" style="left:5%;animation-duration:12s;animation-delay:0s;">🔧</div>
+  <div class="particle" style="left:15%;animation-duration:15s;animation-delay:3s;">🔨</div>
+  <div class="particle" style="left:80%;animation-duration:11s;animation-delay:1s;">⚙️</div>
+  <div class="particle" style="left:88%;animation-duration:14s;animation-delay:5s;">🪛</div>
+  <div class="particle" style="left:45%;animation-duration:13s;animation-delay:7s;">📐</div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🐐 Eden Prairie, MN · Licensed &amp; Insured</div>
+      <h1 class="hero-h1">Your Home<em>Fixed Right.</em>Guaranteed.</h1>
+      <p class="hero-sub">20+ years of experience. From carpentry to plumbing, flooring to electrical — we handle it all so you don't have to.</p>
+      <div class="hero-actions">
+        <a href="https://goathandyman.com/get-an-estimate" target="_blank" class="btn-primary">Request Free Estimate</a>
+        <a href="tel:6124384628" class="btn-secondary">📞 (612) 438-4628</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">Years Exp.</span></div>
+        <div class="stat-item"><span class="stat-num">1YR</span><span class="stat-label">Guarantee</span></div>
+        <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Service Areas</span></div>
+      </div>
+    </div>
+
+    <!-- Animated goat illustration — no image needed -->
+    <div class="hero-visual">
+      <div class="goat-svg-wrap">
+        <div class="goat-ring"></div>
+        <div class="goat-ring-2"></div>
+        <div class="goat-circle">
+          <span class="goat-emoji-big">🐐</span>
+        </div>
+        <!-- orbiting tools -->
+        <div class="goat-tool-orbit" style="animation-duration:8s;">
+          <span class="tool-dot" style="top:4px;left:50%;transform:translateX(-50%);">🔧</span>
+        </div>
+        <div class="goat-tool-orbit" style="animation-duration:10s;animation-delay:-3s;">
+          <span class="tool-dot" style="top:50%;right:4px;transform:translateY(-50%);">🔨</span>
+        </div>
+        <div class="goat-tool-orbit" style="animation-duration:12s;animation-delay:-6s;">
+          <span class="tool-dot" style="bottom:4px;left:50%;transform:translateX(-50%);">🪛</span>
+        </div>
+        <div class="goat-tool-orbit" style="animation-duration:9s;animation-delay:-1s;">
+          <span class="tool-dot" style="top:50%;left:4px;transform:translateY(-50%);">⚙️</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-bg" id="services">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-label">What We Fix</div>
+      <h2 class="section-title">Our Services</h2>
+      <p style="color:#777;margin-top:1rem;font-size:1rem;font-weight:600;max-width:550px;">Don't see what you need? Call us for a free consultation.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card"><span class="service-icon">🪚</span><h3>Carpentry</h3><ul><li>Door hanging &amp; adjustments</li><li>Hinge &amp; doorknob replacement</li><li>Crown molding installation</li><li>Cabinet doors &amp; hardware</li><li>Drywall patching &amp; repair</li><li>Window repairs</li></ul></div>
+      <div class="service-card"><span class="service-icon">🏠</span><h3>Flooring</h3><ul><li>Repair damaged flooring</li><li>Install LVT, ceramic &amp; tile</li><li>Natural stone &amp; hardwood</li><li>Fix squeaky subfloors</li></ul></div>
+      <div class="service-card"><span class="service-icon">🔒</span><h3>Home Safety</h3><ul><li>Smoke &amp; CO detector service</li><li>Air filters &amp; light bulbs</li><li>Baby proofing</li><li>Railing installation &amp; repair</li></ul></div>
+      <div class="service-card"><span class="service-icon">⚡</span><h3>Electrical &amp; Plumbing</h3><ul><li>Light fixtures &amp; ceiling fans</li><li>Kitchen &amp; bath fixtures</li><li>Leaky faucet &amp; toilet repair</li><li>Drain unclogging</li><li>Garbage disposal service</li></ul></div>
+      <div class="service-card"><span class="service-icon">📦</span><h3>Assembly &amp; Install</h3><ul><li>Furniture assembly</li><li>TV mounting</li><li>Shelves &amp; picture hanging</li><li>Blinds &amp; window treatments</li><li>Smart doorbells &amp; cameras</li></ul></div>
+      <div class="service-card"><span class="service-icon">🏢</span><h3>Building Management</h3><ul><li>Rental property maintenance</li><li>Turnover services</li><li>Rekeying locks</li><li>Home sale prep</li><li>Power washing</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="process-container">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Simple. Fast. Done.</h2>
+      <p style="color:#777;margin-top:0.75rem;font-size:0.95rem;font-weight:600;">Click any step to learn more.</p>
+    </div>
+    <div class="steps-wrapper reveal">
+      <div class="steps-line"><div class="steps-line-fill" id="lineF"></div></div>
+      <div class="steps-track">
+        <div class="process-step active" onclick="selectStep(0)">
+          <div class="step-icon-wrap"><span class="step-num">1</span><span class="step-emoji">📋</span></div>
+          <h4 class="step-title">Request Estimate</h4>
+          <p class="step-desc">Quick form or call. Fast upfront quote.</p>
+        </div>
+        <div class="process-step" onclick="selectStep(1)">
+          <div class="step-icon-wrap"><span class="step-num">2</span><span class="step-emoji">📅</span></div>
+          <h4 class="step-title">Schedule Job</h4>
+          <p class="step-desc">Pick a date. We show up on time.</p>
+        </div>
+        <div class="process-step" onclick="selectStep(2)">
+          <div class="step-icon-wrap"><span class="step-num">3</span><span class="step-emoji">🔧</span></div>
+          <h4 class="step-title">We Fix It</h4>
+          <p class="step-desc">Expert work, 20+ years experience.</p>
+        </div>
+        <div class="process-step" onclick="selectStep(3)">
+          <div class="step-icon-wrap"><span class="step-num">4</span><span class="step-emoji">✅</span></div>
+          <h4 class="step-title">You Approve</h4>
+          <p class="step-desc">Walk-through + 1-year guarantee.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-detail-panel panel-animate" id="detailPanel">
+      <div class="detail-icon" id="detailIcon">📋</div>
+      <div class="detail-content">
+        <div class="detail-step-label" id="detailLabel">Step 1 of 4</div>
+        <h3 class="detail-title" id="detailTitle">Request Your Free Estimate</h3>
+        <p class="detail-text" id="detailText">Fill out a quick form or call us at (612) 438-4628. We respond fast with a clear, transparent quote — no hidden fees, no surprises.</p>
+        <div class="detail-cta"><a href="https://goathandyman.com/get-an-estimate" id="detailLink" target="_blank">Get My Free Estimate →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="guarantee-section" id="about">
+  <div class="guarantee-inner">
+    <div class="guarantee-text reveal">
+      <div class="section-label" style="color:var(--orange-light);">Our Story</div>
+      <h2 class="section-title light">The G.O.A.T.<br>Guarantee</h2>
+      <p style="color:rgba(255,255,255,0.55);margin-top:1.5rem;font-size:1rem;font-weight:600;line-height:1.8;max-width:400px;">Our founder brings 20+ years of property management and handyman expertise. We stand behind every nail, every repair, every job.</p>
+    </div>
+    <div class="guarantee-points reveal">
+      <div class="guarantee-item"><div class="guarantee-num">01</div><div class="guarantee-item-text"><h4>1-Year Workmanship Guarantee</h4><p>Any defects in our workmanship are repaired free of charge for a full year from the date of service.</p></div></div>
+      <div class="guarantee-item"><div class="guarantee-num">02</div><div class="guarantee-item-text"><h4>We Respect Your Time</h4><p>We arrive on time, every time. Unforeseen delays are communicated proactively — no surprises.</p></div></div>
+      <div class="guarantee-item"><div class="guarantee-num">03</div><div class="guarantee-item-text"><h4>We Respect Your Home</h4><p>Your home is treated with the same care and pride as our own. Clean up always included.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAME -->
+<section class="game-section" id="game">
+  <div style="max-width:700px;margin:0 auto;text-align:center;">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--orange-light);">Take a Break</div>
+      <h2 class="section-title light">Fix It Mini Game</h2>
+      <p style="color:rgba(255,255,255,0.5);margin-top:1rem;font-size:0.95rem;font-weight:600;">Catch tools for points · Grab stars for bonus · Avoid bombs!</p>
+    </div>
+    <div class="game-wrapper reveal">
+      <div class="game-header"><span>🐐</span><h3>GOAT CATCHER</h3><span class="game-badge">Mini Game</span></div>
+      <canvas id="gameCanvas" width="680" height="380"></canvas>
+      <div class="game-controls">
+        <button class="game-btn" id="startBtn" onclick="startGame()">▶ Start Game</button>
+        <button class="game-btn" id="restartBtn" onclick="restartGame()" style="display:none;background:#252c40;">↺ Restart</button>
+        <div class="game-score-display">Score: <span id="scoreDisplay">0</span> &nbsp; Lives: <span id="livesDisplay">❤️❤️❤️❤️❤️</span></div>
+      </div>
+      <div class="game-instructions">← → Arrow Keys or A / D to move · Touch &amp; drag on mobile</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Cross It Off<br>Your List?</h2>
+  <p>Serving Eden Prairie, Minneapolis &amp; surrounding Twin Cities metro.</p>
+  <div class="cta-phone">📞 (612) 438-4628</div>
+  <div class="cta-buttons">
+    <a href="https://goathandyman.com/get-an-estimate" target="_blank" class="btn-white">Get a Free Estimate</a>
+    <a href="https://goathandyman.com/join-our-team" target="_blank" class="btn-outline-white">Join Our Team</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-icon">🐐</div>
+    <div class="footer-logo-text">G.O.A.T. <em>Handyman</em></div>
+  </div>
+  <div class="footer-info">7500 Golden Triangle Drive, Suite 5<br>Eden Prairie, MN 55344<br>Office: (612) 438-4628</div>
+  <div class="footer-copy">© 2025 G.O.A.T. Handyman, LLC · Licensed &amp; Insured</div>
+</footer>
+
+<script>
+// Scroll reveal
+var revObs = new IntersectionObserver(function(e){ e.forEach(function(x){ if(x.isIntersecting) x.target.classList.add('visible'); }); },{threshold:0, rootMargin:"0px 0px -20px 0px"});
+document.querySelectorAll('.reveal').forEach(function(el){ revObs.observe(el); });
+// Fallback: if observer doesn't fire (e.g. in iframe), reveal all after short delay
+setTimeout(function(){
+  document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+}, 400);
+
+// Nav scroll + active
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function(){
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+  var cur = '';
+  document.querySelectorAll('section[id]').forEach(function(s){ if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  document.querySelectorAll('.nav-link').forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+cur); });
+});
+
+// Hamburger
+var hb = document.getElementById('hamburger');
+var mm = document.getElementById('mobileMenu');
+hb.addEventListener('click', function(){ hb.classList.toggle('open'); mm.classList.toggle('open'); });
+document.querySelectorAll('.mobile-menu a').forEach(function(a){ a.addEventListener('click', function(){ hb.classList.remove('open'); mm.classList.remove('open'); }); });
+
+// Process steps
+var stepData = [
+  {icon:'📋',label:'Step 1 of 4',title:'Request Your Free Estimate',text:'Fill out a quick form or call us at (612) 438-4628. We respond fast with a clear, transparent quote — no hidden fees, no surprises.',link:'Get My Free Estimate →',href:'https://goathandyman.com/get-an-estimate'},
+  {icon:"📅",label:"Step 2 of 4",title:"Schedule at Your Convenience",text:"Pick a date and time that works for you. We lock it in, send a confirmation, and show up on time — that's the G.O.A.T. promise.",link:"Book Now →",href:"https://goathandyman.com/get-an-estimate"},
+  {icon:'🔧',label:'Step 3 of 4',title:'Expert Work, Every Time',text:'Our skilled handymen tackle the job with 20+ years of experience, the right tools, and total respect for your home and your time.',link:'See Our Services →',href:'#services'},
+  {icon:"✅",label:"Step 4 of 4",title:"Approved & Guaranteed",text:"We walk you through everything done. Not satisfied? We'll make it right — backed by our full 1-Year Workmanship Guarantee.",link:"Learn About Our Guarantee →",href:"#about"}
+];
+var autoTimer = null;
+function selectStep(idx){
+  clearInterval(autoTimer);
+  document.querySelectorAll('.process-step').forEach(function(s,i){ s.classList.toggle('active', i===idx); });
+  document.getElementById('lineF').style.width = Math.round(idx/(stepData.length-1)*100)+'%';
+  var d = stepData[idx];
+  var panel = document.getElementById('detailPanel');
+  panel.classList.remove('panel-animate'); void panel.offsetWidth; panel.classList.add('panel-animate');
+  document.getElementById('detailIcon').textContent = d.icon;
+  document.getElementById('detailLabel').textContent = d.label;
+  document.getElementById('detailTitle').textContent = d.title;
+  document.getElementById('detailText').textContent = d.text;
+  var lnk = document.getElementById('detailLink');
+  lnk.textContent = d.link; lnk.href = d.href;
+  autoTimer = setInterval(function(){ idx=(idx+1)%stepData.length; selectStep(idx); }, 4000);
+}
+selectStep(0);
+
+// Game
+var canvas = document.getElementById('gameCanvas');
+var ctx = canvas.getContext('2d');
+var TOOLS = ['🔧','🔨','🪛','⚙️','📐','🔩','🪚'];
+var BONUS = ['⭐','💰','🎯'];
+var gameState='idle', score=0, lives=5, frame=0;
+var bx, bw=130, bh=28, by;
+var items=[], keys={}, baseSpeed=1.8, ptcls=[], raf2;
+
+function initGame(){ bx=canvas.width/2-bw/2; by=canvas.height-55; items=[]; ptcls=[]; score=0; lives=5; frame=0; baseSpeed=1.8; updateHUD(); }
+
+function spawnItem(){
+  var r=Math.random(), type, emoji, pts;
+  if(r<0.07 && score>20){ type='bomb'; emoji='💣'; pts=0; }
+  else if(r<0.15){ type='bonus'; emoji=BONUS[Math.floor(Math.random()*BONUS.length)]; pts=30; }
+  else{ type='tool'; emoji=TOOLS[Math.floor(Math.random()*TOOLS.length)]; pts=10; }
+  items.push({x:40+Math.random()*(canvas.width-80),y:-35,emoji:emoji,type:type,pts:pts,size:26+Math.random()*12,speed:baseSpeed+Math.random()*1.2,rot:(Math.random()-0.5)*0.06});
+}
+
+function spawnPtcls(x,y,col,n){
+  for(var i=0;i<n;i++) ptcls.push({x:x,y:y,vx:(Math.random()-0.5)*6,vy:-Math.random()*5-2,life:1,col:col,sz:3+Math.random()*4});
+}
+
+function updateHUD(){
+  document.getElementById('scoreDisplay').textContent = score;
+  var h=Math.max(0,lives);
+  document.getElementById('livesDisplay').textContent = '❤️'.repeat(h)+(h<5?'🖤'.repeat(5-h):'');
+}
+
+function drawBg(){
+  ctx.fillStyle='#111827'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle='rgba(242,101,34,0.07)'; ctx.lineWidth=1;
+  for(var x=0;x<canvas.width;x+=40){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+  for(var y=0;y<canvas.height;y+=40){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+  ctx.strokeStyle='rgba(242,101,34,0.3)'; ctx.lineWidth=2; ctx.setLineDash([6,4]);
+  ctx.beginPath(); ctx.moveTo(0,canvas.height-22); ctx.lineTo(canvas.width,canvas.height-22); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle='rgba(242,101,34,0.12)'; ctx.fillRect(10,10,160,56);
+  ctx.strokeStyle='rgba(242,101,34,0.3)'; ctx.lineWidth=1; ctx.strokeRect(10,10,160,56);
+  ctx.fillStyle='#F26522'; ctx.font='bold 11px sans-serif'; ctx.textAlign='left'; ctx.fillText('SCORE',22,30);
+  ctx.font='bold 24px sans-serif'; ctx.fillStyle='white'; ctx.fillText(score,22,54);
+}
+
+function drawBasket(){
+  var g=ctx.createLinearGradient(bx,by,bx,by+bh);
+  g.addColorStop(0,'#F26522'); g.addColorStop(1,'#D4541A');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,7); ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.15)'; ctx.beginPath(); ctx.roundRect(bx+4,by+4,bw-8,6,3); ctx.fill();
+  ctx.fillStyle='#c8a200'; ctx.fillRect(bx+bw/2-11,by+5,22,18);
+  ctx.strokeStyle='#a07800'; ctx.lineWidth=1.5; ctx.strokeRect(bx+bw/2-11,by+5,22,18);
+}
+
+function drawIdle(){
+  drawBg(); ctx.textAlign='center';
+  ctx.fillStyle='#F26522'; ctx.font='bold 40px sans-serif'; ctx.fillText('GOAT CATCHER',canvas.width/2,canvas.height/2-35);
+  ctx.font='bold 15px sans-serif'; ctx.fillStyle='rgba(255,255,255,0.65)'; ctx.fillText('Catch tools · Grab stars · Avoid bombs!',canvas.width/2,canvas.height/2+10);
+  ctx.font='34px serif'; ctx.fillText('🔧  🔨  ⭐  💣  🪛',canvas.width/2,canvas.height/2+60);
+}
+
+function drawOver(){
+  drawBg(); ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.textAlign='center';
+  ctx.fillStyle='#F26522'; ctx.font='bold 52px sans-serif'; ctx.fillText('GAME OVER',canvas.width/2,canvas.height/2-35);
+  ctx.fillStyle='white'; ctx.font='bold 20px sans-serif'; ctx.fillText('Final Score: '+score,canvas.width/2,canvas.height/2+12);
+  ctx.fillStyle='rgba(255,255,255,0.5)'; ctx.font='14px sans-serif'; ctx.fillText('Press Restart to play again!',canvas.width/2,canvas.height/2+50);
+}
+
+function loop(){
+  if(gameState==='idle'){ drawIdle(); raf2=requestAnimationFrame(loop); return; }
+  if(gameState==='dead'){ drawOver(); return; }
+  frame++;
+  if(keys['ArrowLeft']||keys['a']||keys['A']) bx=Math.max(0,bx-9);
+  if(keys['ArrowRight']||keys['d']||keys['D']) bx=Math.min(canvas.width-bw,bx+9);
+  baseSpeed = 1.8 + score*0.012;
+  if(frame % Math.max(28, Math.floor(65-score*0.35)) === 0) spawnItem();
+  for(var i=items.length-1;i>=0;i--){
+    var t=items[i]; t.y+=t.speed;
+    var hit = t.y+t.size/2>by && t.y-t.size/2<by+bh && t.x>bx-16 && t.x<bx+bw+16;
+    if(hit){
+      if(t.type==='bomb'){ lives=Math.max(0,lives-2); spawnPtcls(t.x,t.y,'#ff4444',12); }
+      else{ score+=t.pts; spawnPtcls(t.x,t.y,t.type==='bonus'?'#FFD700':'#F26522',t.type==='bonus'?16:8); }
+      items.splice(i,1); updateHUD();
+      if(lives<=0){ gameState='dead'; document.getElementById('restartBtn').style.display='inline-block'; document.getElementById('startBtn').style.display='none'; loop(); return; }
+    } else if(t.y>canvas.height+10){
+      if(t.type!=='bomb'){ lives=Math.max(0,lives-1); updateHUD(); }
+      items.splice(i,1);
+      if(lives<=0){ gameState='dead'; document.getElementById('restartBtn').style.display='inline-block'; document.getElementById('startBtn').style.display='none'; loop(); return; }
+    }
+  }
+  for(var j=ptcls.length-1;j>=0;j--){ var p=ptcls[j]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.25; p.life-=0.05; if(p.life<=0) ptcls.splice(j,1); }
+  drawBg();
+  items.forEach(function(t){
+    ctx.save(); ctx.translate(t.x,t.y); ctx.rotate(t.rot*frame);
+    if(t.type==='bonus'){ ctx.shadowColor='#FFD700'; ctx.shadowBlur=14; }
+    ctx.font=t.size+'px serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t.emoji,0,0);
+    ctx.shadowBlur=0; ctx.restore();
+  });
+  ptcls.forEach(function(p){ ctx.save(); ctx.globalAlpha=p.life; ctx.fillStyle=p.col; ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*p.life,0,Math.PI*2); ctx.fill(); ctx.restore(); });
+  drawBasket();
+  raf2=requestAnimationFrame(loop);
+}
+
+function startGame(){ cancelAnimationFrame(raf2); initGame(); gameState='playing'; document.getElementById('startBtn').style.display='none'; document.getElementById('restartBtn').style.display='inline-block'; loop(); }
+function restartGame(){ cancelAnimationFrame(raf2); initGame(); gameState='playing'; loop(); }
+
+document.addEventListener('keydown',function(e){ keys[e.key]=true; if(e.key.startsWith('Arrow')) e.preventDefault(); });
+document.addEventListener('keyup',function(e){ keys[e.key]=false; });
+var txStart=0;
+canvas.addEventListener('touchstart',function(e){ txStart=e.touches[0].clientX; e.preventDefault(); },{passive:false});
+canvas.addEventListener('touchmove',function(e){ var dx=e.touches[0].clientX-txStart; bx=Math.max(0,Math.min(canvas.width-bw,bx+dx*1.5)); txStart=e.touches[0].clientX; e.preventDefault(); },{passive:false});
+
+drawIdle(); raf2=requestAnimationFrame(loop);
+</script>
+</body>
+</html>
